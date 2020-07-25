@@ -61,3 +61,19 @@ $(document).ready(function() {
                     calEvents = storedCal;
                 };
             };
+
+            // When the page loads:
+            loadCal(); // load calendar events
+            initCalendar(); // set the current date and render the calendar
+            hourTracker(); // start tracking the hour block
+
+
+            // checks current time every minute to see if color blocks for past present future need to change
+            function hourTracker() {
+                const checkHourInterval = setInterval(function() {
+                    console.log("tick");
+                    if (moment().isAfter(hourRendered, "minute")) {
+                        initCalendar(); // if it's the next hour, re-render the calendar to change the colors
+                    }
+                }, 60000);
+            };
